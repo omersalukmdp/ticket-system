@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Destek Talebi</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body
+  data-bs-theme="dark"
+  class="text-white"
+  style="
+    background:
+      linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)),
+      url('/bg.png') center / cover no-repeat fixed;
+    font-family: Inter, system-ui;
+  "
+>
+
+<!-- LOGO SOL ÜST -->
+<div class="position-absolute top-0 start-0 p-4">
+  <img src="/logo.png" style="height:48px">
+</div>
+
+<div class="container py-5" style="max-width:720px">
+
+  <!-- FORM (AŞAĞI ALINDI) -->
+  <div class="card bg-black mb-5 mt-5 pt-3">
+    <div class="card-body">
+
+      <h4 class="fw-semibold mb-3 text-center">
+        Destek Talebi Oluştur
+      </h4>
+
+      <form method="POST" action="/ticket" class="vstack gap-2">
+
+        <div>
+          <label class="form-label text-white">E-posta</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="ornek@firma.com"
+            required>
+        </div>
+
+        <div>
+          <label class="form-label text-white">Departman</label>
+          <input
+            type="text"
+            name="department"
+            class="form-control"
+            placeholder="Bilgi İşlem"
+            required>
+        </div>
+
+        <div>
+          <label class="form-label text-white">Sorun</label>
+          <textarea
+            name="issue"
+            rows="4"
+            class="form-control"
+            placeholder="Karşılaştığınız sorunu detaylı yazınız"
+            required></textarea>
+        </div>
+
+        <button class="btn btn-warning fw-semibold text-dark mt-2">
+          Ticket Oluştur
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- TICKET LİSTESİ -->
+  <h6 class="fw-semibold mb-3">
+    Daha Önce Gönderilen Talepler
+  </h6>
+
+  <div class="card bg-black border border-secondary">
+    <div class="card-body p-0">
+
+      <table class="table table-dark table-hover mb-0">
+        <thead>
+          <tr>
+            <th>E-posta</th>
+            <th>Departman</th>
+            <th>Sorun</th>
+            <th>Tarih</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% 
+          const fmt = new Intl.DateTimeFormat('tr-TR', {
+            timeZone: 'Europe/Istanbul',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        %>
+
+        <% if (!tickets.length) { %>
+          <tr>
+            <td colspan="4" class="text-center text-white-50 py-4">
+              Henüz destek talebi yok
+            </td>
+          </tr>
+        <% } %>
+
+        <% tickets.forEach(t => { %>
+          <tr>
+            <td><%= t.email %></td>
+            <td><%= t.department %></td>
+            <td style="max-width:420px; white-space:normal;">
+              <%= t.issue %>
+            </td>
+            <td class="text-white-50">
+              <%= fmt.format(new Date(t.created_at)) %>
+            </td>
+          </tr>
+        <% }) %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

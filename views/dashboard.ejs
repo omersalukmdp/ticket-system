@@ -1,0 +1,14 @@
+<h2>Açık Ticketlar</h2>
+
+<% tickets.forEach(t => { %>
+  <p>
+    <b><%= t.full_name %></b> - <%= t.department %><br>
+    <%= t.issue %>
+  </p>
+  <form method="POST" action="/admin/close/<%= t.id %>">
+    <button>Çözüldü</button>
+  </form>
+  <hr>
+<% }) %>
+
+<a href="/admin/closed">Çözülenler</a>

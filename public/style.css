@@ -1,0 +1,65 @@
+/* GENEL SAYFA */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* LOGO */
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.logo img {
+  height: 60px;
+}
+
+/* BAŞLIK */
+h2 {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+form {
+  width: 400px;
+  margin: 140px auto 0 auto; /* ortala + aşağı al */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* INPUT & TEXTAREA */
+input,
+textarea {
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #444444;
+  padding: 10px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* BUTON */
+button {
+  background-color: #f1c40f;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d4ac0d;
+}
